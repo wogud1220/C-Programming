@@ -17,8 +17,8 @@ int main() {
 	char* p = "computerprogramming";
 	int i = 0;
 	for (i = 0; i < 20; i++) {
-		if (p[i] == 'e') {
-			printf("포인터로 찾은 e는 %d번째에 있습니다.\n", i+1);
+		if (*(p+i) == 'e') {
+			printf("포인터로 찾은 e는 %d번째에 있습니다.\n", i + 1);
 		}
 	}
 }
