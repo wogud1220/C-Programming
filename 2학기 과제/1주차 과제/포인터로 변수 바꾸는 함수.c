@@ -16,7 +16,7 @@ int main(void) {	//main 함수 선언
 
 //포인터를 사용한 swap
 
-/*int swap(int* x, int* y) {//포인터형 변수 x,y를 매개변수로 받는 swap함수 생성
+/*void swap(int* x, int* y) {//포인터형 변수 x,y를 매개변수로 받는 swap함수 생성
 	int temp = *x;		//x에 있는 값을 temp로 이동
 	*x = *y;			//y에 있는 값을 x로 이동
 	*y = temp;			//y에 있는 값을 temp로 이동
@@ -28,4 +28,5 @@ int main(void) {		//main함수 선언
 	printf("변경 전 x값과 y값 %d %d\n", x, y);	//swap전 x값과 y값 출력
 	swap(&x, &y);		//x와 y값의 주소를 swap함수의 매개변수로 이동
 	printf("변경 후 x값과 y값 %d %d\n", x, y);	// 변경 후 x값과 y값 출력
+	return 0;
 }*/
