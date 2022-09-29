@@ -1,7 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 int main() {
-	//1.
 	char animal2[4][10] = { "dog","cat","horse","elephant" };
 
 
@@ -17,7 +16,7 @@ int main() {
 	{'c','a','t'},
 	{'d','o','g'},
 	{'h','o','r','s','e'},
-	{'e','l','p','h','a','n','t'}
+	{'e','l','e','p','h','a','n','t'}
 	};
 
 	int i;
