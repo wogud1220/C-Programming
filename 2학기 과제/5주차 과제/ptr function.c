@@ -26,11 +26,10 @@ int small(int x, int y) {
 int main() {
 	int x, y, n;
 	int(*fp)(int x, int y);
-
+start:
 	printf("두 정수를 입력하세요\n");
 	scanf("%d %d", &x, &y);
 	printf("\n어떤 연산을 실행할까요?\n");
-	start:
 	printf("(1~5 중 선택. 0입력하면 종료) <== 반복 실행\n");
 	printf("0: 종료\n1: +\n2: -\n3: *\n4: 최댓값\n5: 최솟값\n\n");
 	scanf("%d", &n);
