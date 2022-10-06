@@ -62,3 +62,25 @@ start:
 		printf("\n");
 		goto start;
 	}
+
+
+// switch문
+	/* switch (n) {
+	case 0:printf("종료하겠습니다.");
+	return 0;
+	case 1:		fp = sum;
+		printf("%d\n", fp(x, y)); break;
+	case 2:		fp = subtract;
+		printf("%d\n", fp(x, y)); break;
+	case 3:		fp = multi;
+		printf("%d\n", fp(x, y)); break;
+	case 4:		fp = big;
+		printf("%d\n", fp(x, y)); break;
+	case 5:		fp = small;
+		printf("%d\n", fp(x, y)); break;
+	default:printf("0~5중 선택하세요.\n");
+	}
+	printf("%d\n", fp(x,y));
+	
+	printf("\n");
+	goto start;*/
