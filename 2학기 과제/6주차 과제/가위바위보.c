@@ -12,7 +12,7 @@ int main(void) {
 	for (int i = 0; i < 10; i++) {
 		random = rand() % 3;          // 가위, 바위, 보를 위한 3개의 난수 생성
 		printf("가위, 바위, 보 중에서 하나를 입력하세요\n 가위는 0, 바위는 1, 보는 2\n");
-		scanf("%s", user);
+		gets(user); // 또는 scanf("%s", user)
 		switch (random) {
 		case 0: strcpy(computer, "가위");
 			break;
@@ -68,5 +68,5 @@ int main(void) {
 			}
 		}
 	}
-return 0;
+	return 0;
 }
