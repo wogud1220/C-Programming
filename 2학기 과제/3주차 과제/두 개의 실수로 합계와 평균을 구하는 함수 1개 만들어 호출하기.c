@@ -6,7 +6,7 @@ void add(int num1, int num2, int *sum, int *avg) {	//main 함수에서 입력받
 int main(void) {	// main함수 선언
 	int num1, num2, sum, avg;	//정수형 변수 선언
 	scanf_s("%d %d", &num1, &num2);	//입력받은 정수를 num1과 num2의 주소에 저장
-	add(num1, num2, &sum, &avg);	//4개의 인자들을 add함수로 전달하며 add함수 호출
+	add( num1, num2,&sum, &avg);	//4개의 인자들을 add함수로 전달하며 add함수 호출
 	printf("합계:%d\n평균:%d\n", sum, avg);	//sum과 avg의 값 출력
 }
 

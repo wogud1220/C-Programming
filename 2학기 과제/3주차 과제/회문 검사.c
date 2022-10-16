@@ -1,5 +1,5 @@
 #include<stdio.h>
-voidPalindrome(char *p);
+void Palindrome(char *p);
 intmain(void)
 {
     char word[50];
@@ -8,7 +8,7 @@ intmain(void)
     Palindrome(word);
     return 0;
 }
-voidPalindrome(char *p)
+void Palindrome(char *p)
 {
     int i,count=0,len=0;
     for(i=0;p[i]!=0;i++)
