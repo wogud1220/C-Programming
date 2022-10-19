@@ -1,0 +1,14 @@
+putchar, fputc : 하나의 문잧 출력
+fputc: 스트림 지정 가능 
+fputc(int c,  FILE * STEAM)
+
+
+int ch1;
+getchar fgetc : 하나의 문자를 입력 받을 때
+ch1=fgetc(stdin)
+
+
+
+puts, fputs
+puts: 자동개행
+fputs: 자동개행 X
