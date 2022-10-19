@@ -1,8 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 /*int value(int a) {
-	int b = a * a;
-	return b;
+	return = a * a;
+	
 }
 int main() {
 	int a;

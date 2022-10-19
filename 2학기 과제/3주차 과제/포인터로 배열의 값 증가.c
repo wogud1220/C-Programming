@@ -5,7 +5,7 @@ int main() {
 	int* ptr = arr;
 	*ptr = *ptr + 2;
 	while (i < 5) {
-		printf("%d\n", (*ptr +i));
+		printf("%d\n", *(ptr +i));
 		i++;
 	}
 

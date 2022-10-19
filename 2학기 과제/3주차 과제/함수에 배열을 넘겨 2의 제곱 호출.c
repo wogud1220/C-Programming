@@ -9,7 +9,7 @@ int main() {
 	ref(arr);
 	return 0;
 }
-int ref(int arr[101]) {
+int ref(int arr[]) {
 	int i = 1;
 	int n = 2;
 	for (i = 1; i <= 100; i++) {
