@@ -1,6 +1,6 @@
 putchar, fputc : 하나의 문잧 출력
 fputc: 스트림 지정 가능 
-fputc(int c,  FILE * STEAM)
+fputc(int c, stdout)
 
 
 int ch1;
