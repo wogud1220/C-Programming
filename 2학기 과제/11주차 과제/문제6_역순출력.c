@@ -1,35 +1,55 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include <stdlib.h>
 #include <stdio.h>
 
 
-int main(void)
 
-{
+int main(void) {
 
-	FILE* fp = fopen("text.txt", "wt");
-
-	char str[3][100];
+	FILE* fp;
+	char buf[100];
+	char list[10][100];
 	int i = 0;
-	int a = 0;
+
+
+	fp = fopen("text.txt", "w+");
+
+	if (fp == NULL) {
+		puts("파일오픈 실패!");
+		return -1;
+	}
+
 	for (i = 0; i < 3; i++) {
-		printf("문자를 입력\n");
-		gets(str[i]);
-		fputs(str[i], fp);
-		fputs("\n", fp);
+		printf("%d번째 문장 입력 :", i+1);
+		gets(list[i]);
+		fputs(list[i], fp);
+		fputs("\n",fp);
 	}
 
-	fclose(fp);
+	i = 0;
 
-	FILE* fp2 = fopen("text.txt", "rt");
-	while (fgets(str, sizeof(str), fp2) != NULL) {
-		printf("%d   %s", i + 1, str[i]);
+	fseek(fp, 0, SEEK_SET);
+
+	while (fgets(list[i], sizeof(list[i]), fp) != NULL) {
+
+		printf("%d: %s", i + 1, list[i]);
+
 		i++;
+
 	}
+	//puts("");
+
 	while (i > 0) {
+
 		i--;
-		printf("%d   %s", i + 1, str[i]);
+
+		printf("%d: %s", i + 1, list[i]);
+
 	}
-	fclose(fp2);
+
+
+
 	return 0;
 
 }
+
