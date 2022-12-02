@@ -74,8 +74,7 @@ int main()
     scanf("%s", s);
     while (cp3->next != NULL) {
         if (strcmp(cp3->next->name, s) == 0) {
-             printf("%s님이 탈퇴했습니다\n\
-앞으로는 %s는%s에게 연락해야합니다. %s의 전화번호는 %s입니다.", s,cp3->name, cp3->next->next->name, cp3->next->next->name, cp3->next->next->number);
+             printf("%s는%s에게 연락해야합니다. %s의 전화번호는 %s입니다.", cp3->name, cp3->next->next->name, cp3->next->next->name, cp3->next->next->number);
         }
         cp3 = cp3->next;
     }
