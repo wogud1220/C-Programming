@@ -13,8 +13,8 @@ typedef enum e_mem {
  
 int main() {
 	MEM member;
-	member.mem3 = 1.72;
-	member.mem2 = 10;
+	member.mem3 = 1.72;				//mem3부터 쓴 이유: mem3의 크기가 가장 크기 때문에 덮어쓰지않음
+	member.mem2 = 10;				//mem1, mem2부터 쓰면 오류가 남.
 	member.mem1 = 'a';
 	E_NUM dufrj;
 	puts("");
