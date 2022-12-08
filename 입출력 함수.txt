@@ -18,8 +18,3 @@ gets, fgets: 문자열 입력 함수
 fgets(str1,sizeof(str1),stdin);
 str1[strlen(str1)-1]=0;
 
-
-struct point{
-    int xpos;
-    int ypos;
-}pos1;
