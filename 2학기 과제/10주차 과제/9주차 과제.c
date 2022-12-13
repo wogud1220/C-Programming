@@ -67,7 +67,7 @@ void addList(ONEWORD* ptr, char* in_word) {
 }*/
 
 
-//내가한것
+//한것
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>

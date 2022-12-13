@@ -17,7 +17,6 @@ int main() {
 	case spring:
 		ptr = "inline";
 		break;
-	
 	case summer:
 		ptr = "swimming";
 		break;

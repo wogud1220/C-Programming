@@ -80,7 +80,7 @@ void readDict(ONEWORD* rptr, int* cptr) {
         printf("파일이 없습니다.\n");
             return;
     }
-    for (i - 0; i < 100 && feof(fp) == 0; i++) {
+    for (i = 0; i < 100 && feof(fp) == 0; i++) {
         fread((ONEWORD*)(rptr + i), sizeof(ONEWORD), 1, fp);
     }
     fclose(fp);

@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 
-long asdf(FILE* fp) {
+int asdf(FILE* fp) {
 	int fpos = ftell(fp);
 	return fpos;
 }
