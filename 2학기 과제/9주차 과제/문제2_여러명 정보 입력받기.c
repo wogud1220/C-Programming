@@ -14,7 +14,7 @@ typedef struct employee {
 
 
 int main() {
-	EMPLOYEE employee[3];
+	EMPLOYEE employee[3];       //배열을 선언해서 구조체가 3개인 것과 비슷.
 	int i = 0;
 	for (i = 0; i < 3; i++) {
 		printf("종업원 이름: ");
