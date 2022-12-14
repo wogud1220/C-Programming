@@ -1,48 +1,139 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
-typedef struct number_book {
-char name[10];
-char phone_number[20];
-struct number_book *next;
-}call;
+
+typedef struct book {
+	char name[10];
+	char phone[20];
+	struct book* next;
+}BOOK;
+
 
 int main() {
-struct number_book *head;
-struct number_book *temp;
-char name[10];
-int cnt = 0;
-temp = head = NULL;
+	BOOK* head;
+	BOOK* temp;
+	BOOK* sick;
+	BOOK* out;
+	BOOK* tail;
+	temp = head = NULL;
+	char in_name[10];
+	int cnt = 0;
 
-while (1) {
-printf("비상연락망에 추가할 사람의 이름을 입력해주세요 (최소 5명의 정보를 입력하고 입력을 종료하고 싶으면 q를 입력해주세요) : ");
-scanf_s("%s", name, 10);
+	while (1) {
+		printf("이름을 입력하세요: ");
+		scanf("%s", in_name);
 
-if (name[0] == 'q')
-break;
-else if (cnt == 0) {
-head = malloc(sizeof(call));
-temp = head;
-}
-else {
-temp->next = malloc(sizeof(call));
-temp = temp->next;
-}
 
-strcpy_s(temp->name, 10, name);
+		if (!strcmp(in_name, "q")) {
+			printf("종료하겠습니다.");
+			break;
+		}
 
-printf("비상연락망에 추가할 사람의 전화번호를 입력해주세요: ");
-scanf_s("%s", temp->phone_number, 20);
+		else if (cnt == 0) {
+			head = malloc(sizeof(BOOK));
+			temp = head;
+		}
+		else {
+			temp->next = malloc(sizeof(BOOK));
+			temp = temp->next;
+		}
 
-temp->next = NULL;
+		strcpy(temp->name, in_name);
 
-cnt++;
-}
+		printf("전화번호를 입력하세요");
+		scanf("%s", temp->phone);
 
-free(head);
-free(temp);
+		temp->next = NULL;
+		cnt++;
 
-return 0;
+	}
+
+
+	temp = head;
+	while (1) {
+		if (temp->next != NULL) {
+			printf("\n%s는 %s에게 연락을 해야 합니다.%s의 연락처는 %s입니다.\n", temp->name, temp->next->name, temp->next->name, temp->next->phone);
+			temp = temp->next;
+		}
+		else if (temp->next == NULL) {
+			printf("%s가 마지막으로 연락을 받았습니다. 모든 구성원들에게 연락을했습니다.\n", temp->name);
+			break;
+		}
+	}
+
+	temp = head;
+	//그냥 사람 찾기
+	printf("찾을 구성원의 이름을 입력하세요: ");
+	scanf("%s", in_name);
+
+	while (1) {
+		if (!strcmp(temp->name, in_name)) {
+			printf("%s는 %s에게 연락해야 합니다. %s의 전화번호는 %s입니다.\n", temp->name, temp->next->name, temp->next->name, temp->next->phone);
+			break;
+		}
+		else
+			temp = temp->next;
+	}
+
+
+	//아픈 사람 찾기
+	temp = head;
+	sick = head;
+	printf("아픈 사람을 입력하세요: ");
+	scanf("%s", in_name);
+
+	printf("\n");
+
+	while (1) {
+		if (!strcmp(temp->name, in_name)) {
+			printf("%s는 %s에게 연락해야 합니다. %s의 전화번호는 %s입니다.\n\n", sick->name, sick->next->next->name, sick->next->next->name, sick->next->next->phone);
+			break;
+		}
+		else {
+			sick = temp;
+			temp = temp->next;
+		}
+	}
+
+	//탈퇴한 사람 찾기
+	temp = head;
+	out = head;
+	
+	printf("탈퇴한 사람을 입력하세요: ");
+	scanf("%s", in_name);
+	while (1) {
+        out ->next = malloc(sizeof(BOOK));
+		if (!strcmp(out->name, in_name)) {
+			printf("%s님이 탈퇴했습니다. 앞으로는 %s가 %s에게 연락해야합니다.\n", out->name, temp->name, out->next->name);
+			temp->next = out->next;
+			free(out);
+			break;
+		}
+		else {
+			temp = out;
+			out = out->next;
+		}
+	}
+
+	temp = head;
+
+
+
+	printf("\n연락처 출력 아프고, 탈퇴한 사람 제외하고\n");
+	while (temp != NULL) {
+		if (!strcmp(sick->name, temp->name)) {
+			temp = temp->next;
+			continue;
+		}
+		//else if(!strcmp(temp->name, ))
+		else {
+			printf("%s의 연락처는 %s입니다.\n", temp->name, temp->phone);
+			temp = temp->next;
+		}
+	}
+
+
+
 }
