@@ -90,7 +90,7 @@ int main() {
 
     while (1) {
         //--- 여기서 왜 sick->name과 비교하지 않고 temp->name과 비교할까요??? 
-        //--- 아래에서 temp아 아픈 사람이고, sick은 아픈사람의 바로 앞에 있는 사람인가요? 
+        //--- 아래에서 temp아 아픈 사람이고, sick은 아픈사람의 바로 앞에 있는 사람인가요?   ㅇㅇ
         //--- 그러면 sick->name이 temp->next->name에게 연락하는 게 맞음 
         if (!strcmp(name, temp->name)) { //--- 아픈 사람을 찾았으면 
             printf("앞으로는 %s는 %s에게 연락을 해야 합니다. %s의 전화번호는 %s입니다.\n",      //아픈 사람 건너뛰고 연락하기

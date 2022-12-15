@@ -1,5 +1,3 @@
-
-
 typedef struct data {
     char name[20];
     char number[20];

@@ -29,7 +29,7 @@ int main() {
 	num에 4바이트 넣고 char에 7바이트 넣어야함 그래서 24바이트가 나옴
 	
 	순서를 오름차순으로 다르게 한다면 메모리 용량을 줄일 수 있음
-	char,num, double 순
+	char,int, double 순
 
 	char=ㅁ			num과 같게하려고 3바이트필요함
 	num =ㅁㅁㅁㅁ	위의 char와 num을 합하면 8바이트됨 doub과 크기가 같게됨
