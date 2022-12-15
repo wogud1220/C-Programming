@@ -11,19 +11,22 @@
 #define STR(A,B)	#A "의 직업은 " #B"입니다."		//문자열을 치환할때는 앞에 # 붙이기
 #define STNUM(X, Y, Z)	(X*100000+Y*1000+Z)			//숫자 치환		(XYZ)로 하면 안됨  그런데 이렇게 하면 더러워지니깐
 #define STNUM_REAL(X, Y, Z)		X ## Y ## Z		//매크로 몸체에서 ##은 서로 이어주는 역할.
+#define ARR(X,Y,Z)	printf("%d%d%d\n",X,Y,Z)	//이렇게 해도 되는듯
 
 int main() {
+	int x = 1, y = 2,z = 3;
+	ARR(x, y, z);
 	printf("%d\n", SQUARE(2));	// 정상적으로 4 출력.
 
 	printf("%d\n", SQUARE_1(3 + 2));	//25 출력
 
-	printf("%d\n",120/SQUARE(2));	//30이 나와야하는데 120 출력	== 120/2*2가 실행됨
+	printf("%d\n", 120 / SQUARE(2));	//30이 나와야하는데 120 출력	== 120/2*2가 실행됨
 
 	printf("%d\n\n", 120 / SQUARE_2(2));	//괄호를 한번 더 해서 정상적인 값 나옴.  == 120/(2*2)가 실행됨
 
-	#ifdef ADD
-		printf("ADD가 정의되었습니다.\n");
-	#endif // ADD
+#ifdef ADD
+	printf("ADD가 정의되었습니다.\n");
+#endif // ADD
 
 
 #if ADD ==1
@@ -36,8 +39,11 @@ int main() {
 	printf("ADD가 1,2,3 다 아닙니다.\n");
 
 #endif // ADD 1
+	
 
-	printf("%s\n",STR(이동춘, 나무꾼));		//문자열을 치환할때는 앞에 # 붙이기
+
+
+	printf("%s\n", STR(이동춘, 나무꾼));		//문자열을 치환할때는 앞에 # 붙이기
 
 
 
