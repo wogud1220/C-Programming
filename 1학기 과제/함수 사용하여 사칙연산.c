@@ -16,25 +16,25 @@ printf("x / y = %d\n", mog);
 int sum(int x, int y)
 {
 int hap;
-hap = x + y
+hap = x + y;
 return hap;
 
 }
 int minus(int x, int y)
 {
 int bbal;
-bbal = x - y
+bbal = x - y;
 return bbal;
 }
 int product(int x, int y)
 {
 int gop;
-gop = x * y
+gop = x * y;
 return gop;
 }
 int quotient(int x, int y)
 {
 int mog;
-mog = x / y
+mog = x / y;
 return mog;
 }
