@@ -10,3 +10,4 @@ int main() {
 	printf("char:  %d\n", sizeof('A'));
 
 }
+
