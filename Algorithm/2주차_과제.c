@@ -78,12 +78,12 @@ void binarySearch(int arr[],int find,int first,int last) {	//배열과 찾을 �
 	}
 	else if (arr[mid] > find) {	//찾을 값이 작으면 mid 왼쪽 이동
 		cnt++;
-		printf("현재 검색 범위: [%d] ~ [%d]\n중간 위치의 값:[%d]\n찾는 값:%d\m", first, last, mid, find);
+		printf("현재 검색 범위: [%d] ~ [%d]\n중간 위치의 값:[%d]\n찾는 값:%d\n", first, last, mid, find);
 		binarySearch(arr, find, first, last / 2);
 	}
 	else if (arr[mid] < find) {
 		cnt++;
-		printf("현재 검색 범위: [%d] ~ [%d]\n중간 위치:[%d]\n비교하는 값:%d\m", first, last, mid, find);
+		printf("현재 검색 범위: [%d] ~ [%d]\n중간 위치:[%d]\n비교하는 값:%d\n", first, last, mid, find);
 		binarySearch(arr, find, mid, last);
 		//찾을 값이 크면 mid 오른쪽 이동
 	}
@@ -98,7 +98,7 @@ void binarySearch(int arr[],int find,int first,int last) {	//배열과 찾을 �
 int main() {
 	int num = 0;
 	int n = 0;
-	int m = 20;	//하노이 개수
+	int m = 5;	//하노이 개수
 	char a = 'A';
 	char b = 'B';
 	char c = 'C';
