@@ -100,7 +100,6 @@ int main()
 			continue;
 		case 2:
 			printf("문자열 입력:");
-
 			scanf(" %[^\n]s", strp);
 			printf("\n공백을 제외한 크기는 %d", fac(strp, 0));
 			printf("\n");
