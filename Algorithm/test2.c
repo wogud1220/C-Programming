@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
-#define MAX_SIZE 100
+#define MAX_SIZE 1000001
 #define TRUE 1
 #define FALSE 0
 #include <stdio.h>
@@ -12,59 +12,73 @@
 // #include <windows.h>
 // #pragma warning(disable:4996)
 
+void swap(int *arr, int x, int y);
+void complex_arrange(int *arr, int size);
+
 int main()
 {
-    // int arr[] = {26, 5, 77, 1, 61, 11, 59, 15, 48, 19};
-    int arr[10];
-    for (int i = 1; i <= 10; i++) // 11~1까지 역순으로 집어넣음
-    {
-        arr[i] = 11 - i;
-    }
+    int arr[] = {69, 10, 32, 44, 56, 13};
+    int size = sizeof(arr) / sizeof(int);
+    /* 배열 출력 */
+    printf("\n 정렬 전 : ");
+    for (int i = 0; i < size; i++)
+        printf("%d ", arr[i]);
 
-    int temp[10];
-    int p = 0;
-    int r = sizeof(arr) / 4; // 10;
-    int i = p;
-    int q = (p + r) / 2;
-    int a = 0;
-    int j = q + 1;
-    int t = 1;
-    while (a < r / 2)
-    {
-        if (arr[i] < arr[i + 1]) // 오른쪽이 더 크면 왼쪽 넣고 오른쪽 넣기
-        {
-            temp[t++] = arr[i++]; // 5저장
-            temp[t++] = arr[i++]; // 5다음인 26저장
-        }
-        else // 왼쪽이 더 크면 오른쪽 넣고 왼쪽 넣기
-        {
-            temp[t++] = arr[i + 1];
-            i++;
-            temp[t++] = arr[i++];
-        }
-        i = i + 1; // i=2가 됐음
+    /* 정렬 */
+    complex_arrange(arr, size);
 
-    } // 2개씩 묵음 끝남
-    i = 1;
-    a = 0;
-    while (a < r / 2 / 2)
-    {
-        if (arr[i] < arr[i + 1]) // 오른쪽이 더 크면 왼쪽 넣고 오른쪽 넣기
-        {
-            temp[t++] = arr[i++]; // 5저장
-            temp[t++] = arr[i++]; // 5다음인 26저장
-        }
-        else // 왼쪽이 더 크면 오른쪽 넣고 왼쪽 넣기
-        {
-            temp[t++] = arr[i + 1];
-            i++;
-            temp[t++] = arr[i++];
-        }
-    }
-    while (j <= r) // 왼쪽 정렬 다 끝나고 오른쪽이 남을 경우
-    {
-        temp[t++] = arr[j++];
-    }
+    /* 배열 출력 */
+    printf("\n 정렬 후 : ");
+    for (int i = 0; i < size; i++)
+        printf("%d ", arr[i]);
 
-    //    return 0;
+    return 0;
+}
+
+void complex_arrange(int *arr, int size)
+{
+
+    // 2개짜리, 4개짜리, 8개짜리...
+    int i = 2;
+    while (1)
+    {
+        // 전체범위(j-i) ~ (j-1), 대상범위(j-i/2)~(j-1) -> 삽입정렬 수행
+        for (int j = 0; j <= size; j += i)
+        {
+            /* 삽입정렬을 수행할 대상 */
+            for (int w = j - i / 2; w < j && w > 0; w++)
+            {
+                /* arr[w]를 arr[j-i]까지 삽입정렬 수행 */
+                int k = w;
+                while (k > 0 && k > j - i && arr[k] < arr[k - 1])
+                {
+                    swap(arr, k, k - 1);
+                    k--;
+                }
+            }
+        }
+
+        /* 남은 숫자 처리하고 반복문 탈출 */
+        if (i * 2 > size)
+        {
+            for (int i; i < size; ++i)
+            {
+                int k = i;
+                while (k > 0 && arr[k] < arr[k - 1])
+                {
+                    swap(arr, k, k - 1);
+                    k--;
+                }
+            }
+            break;
+        }
+        i *= 2;
+    }
+}
+
+void swap(int *arr, int x, int y)
+{
+    int temp = arr[x];
+    arr[x] = arr[y];
+    arr[y] = temp;
 }
