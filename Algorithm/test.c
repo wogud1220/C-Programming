@@ -12,70 +12,124 @@
 // #include <windows.h>
 // #pragma warning(disable:4996)
 
-void binarySearch(int arr1[], int arr1Size)
+void insertionSort(int *arr)
 {
-    int first = 0;
-    int end = arr1Size;
-    int find = arr1[first];
-    int cnt = 0;
-    int i = 0;
-    while (1)
+    // 최선의 비교 횟수:n번, 최악의 비교 횟수:n^2;
+    // 최선의 교환 횟수:n^2, 최악의 교환 횟수:n^2;
+    int i, j, temp;
+    int total = 0;
+    printf("삽입 정렬 수행\n");
+    for (i = 1; i < 8; i++)
     {
-        if (find == 10)
-            break;
-        int mid = (end + first) / 2;
-        printf("%d번째 탐색 결과\n현재 검색 범위:[%d] ~ [%d]\n\
-중간 값의 인덱스:[%d]\n",
-               cnt + 1, first, end, mid);
-        if (find == arr1[first])
-        {
-            printf("%d찾기   [%d]번째에서 찾음, %d번의 범위 탐색\n\n", find, first, cnt + 1);
-            find++;
-            // 나머지 first,end,mid돋 초기화해야됨
-            first = 0;
-            cnt = 0;
-            end = arr1Size;
+        int cnt = 1;                                  // 안 옮겨도 카운트해줘야함;
+        temp = arr[i];                                // 비교할 뒤의 숫자를 복사시킴
+        for (j = i - 1; j >= 0 && arr[j] > temp; j--) // 옮길때
+        {                                             // temp가 더 큰 값일 때까지
+            arr[j + 1] = arr[j];                      // 한칸뒤로 이동시킴
+            cnt++;                                    // 옮기면 카운트해주고
+            if (arr[j - 1] == 0)
+            // 기본적으로 1번 카운트해줘서 벽을 만나면 비교한게 아닌 걸로해서 감소시킴
+            {
+                cnt--;
+            }
+        }
 
-            continue;
-        }
-        else if (find == arr1[end])
+        arr[j + 1] = temp; //
+        printf("%d단계: ", i);
+        for (int a = 0; a < 8; a++)
         {
-            printf("%d찾기  [%d]번째에서 찾음, %d번의 범위 탐색\n\n", find, end, cnt + 1);
-            find++;
-            first = 0;
-            cnt = 0;
-            end = arr1Size;
-            continue;
+            printf("%d ", arr[a]);
         }
-        else if (find == arr1[mid])
+        total += cnt;
+        printf(" %d번의 비교\n[%d]번 index까지 정렬 완료.\n\n", cnt, i);
+    }
+    printf("총 비교 횟수는: %d번 입니다.a", total);
+}
+void merge(int arr[], int p, int q, int r)
+{
+    int temp[100];
+    int i = p;
+    int j = q + 1;
+    int t = 1;
+    int a = 0;
+
+    while (i <= q && j <= r) // 정렬이 안끝난 상태에서
+    {
+        if (arr[i] <= arr[j]) // 오른쪽 반이 더 크면
         {
-            printf("%d찾기  [%d]번째에서 찾음, %d번의 범위 탐색\n\n", find, mid, cnt + 1);
-            find++;
-            first = 0;
-            cnt = 0;
-            end = arr1Size;
-            continue;
+            temp[t++] = arr[i++]; // 왼쪽이 더 작으니 왼쪽걸 집어넣기
         }
-        else // 못 찾았고;
+        else
         {
-            if (find < arr1[mid]) // 찾을 값이 중간값보다 작다면;
-            {
-                end = mid;
-                cnt++;
-            }
-            else if (find > arr1[mid]) // 찾을 값이 중간갑ㅂㅅㅂ다 크다면;
-            {
-                first = mid;
-                cnt++;
-            }
+            temp[t++] = arr[j++];
         }
     }
+    // printf("[%d]~\n", arr[0]);
+    while (i <= q) // 오른쪽 정렬 다 끝나고 왼쪽이 남을 경우
+    {
+        temp[t++] = arr[i++];
+    }
+
+    while (j <= r) // 왼쪽 정렬 다 끝나고 오른쪽이 남을 경우
+    {
+        temp[t++] = arr[j++];
+    }
+
+    i = p;
+    t = 1;
+    while (i <= r) // 결과 저장
+    {
+        arr[i++] = temp[t++];
+        printf("[%d] ", temp[t - 1]); // 병합된 범위 출력
+    }
+    printf("정렬됨\n");
+
+    for (int i = 0; i < 8; i++)
+    {
+        printf("[%d] ", arr[i]);
+    }
+
+    // printf("\n[%d]~", arr[i - 2]); // temp[t-1]
+    // printf("[%d]정렬\n\n", arr[j - 1]);
+
+    printf("\n");
+    return;
+}
+void mergeSort(int arr[], int p, int r)
+{
+    if (p < r)
+    {
+        int q = (p + r) / 2;
+        mergeSort(arr, p, q);
+        mergeSort(arr, q + 1, r);
+        merge(arr, p, q, r);
+    }
+    return;
 }
 
 int main()
 {
-    int arr1[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    int arr1Size = sizeof(arr1) / 4 - 1;
-    binarySearch(arr1, arr1Size);
+    int arr[] = {69, 10, 30, 2, 16, 8, 31, 22};
+    int p = 0;
+    int r = 7;
+    printf("1:insertionSort\n2:mergeSort\n");
+    int num;
+    scanf("%d", &num);
+    switch (num)
+    {
+    case 1:
+        insertionSort(arr);
+        break;
+    case 2:
+        printf("<<<<<<<병합 정렬 수행>>>>>>>\n");
+        mergeSort(arr, p, r);
+        break;
+    case 3:
+        iterationMergeSort();
+        break;
+    default:
+        break;
+    }
+
     return 0;
 }
