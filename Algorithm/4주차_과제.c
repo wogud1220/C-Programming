@@ -17,15 +17,18 @@ void insertionSort(int *arr)
     // 최선의 비교 횟수:n번, 최악의 비교 횟수:n(n-1)/2
     int i, j, temp;
     int total = 0;
+
     printf("삽입 정렬 수행\n");
     for (i = 1; i < 8; i++)
     {
-        int cnt = 1;                                  // 안 옮겨도 카운트해줘야함;
-        temp = arr[i];                                // 비교할 뒤의 숫자를 복사시킴
+        int cnt = 1; // 안 옮겨도 카운트해줘야함;
+        temp = arr[i];
+        int exchange = 0;                             // 비교할 뒤의 숫자를 복사시킴
         for (j = i - 1; j >= 0 && arr[j] > temp; j--) // 옮길때
         {                                             // temp가 더 큰 값일 때까지
             arr[j + 1] = arr[j];                      // 한칸뒤로 이동시킴
             cnt++;                                    // 옮기면 카운트해주고
+            exchange++;                               // 교환 횟수 증가
             if (arr[j - 1] == 0)
             // 기본적으로 1번 카운트해줘서 벽을 만나면 비교한게 아닌 걸로해서 감소시킴
             {
@@ -40,7 +43,7 @@ void insertionSort(int *arr)
             printf("%d ", arr[a]);
         }
         total += cnt;
-        printf(" %d번의 비교\n[%d]번 index까지 정렬 완료.\n\n", cnt, i);
+        printf(" %d번의 비교\n%d번의 교환\n[%d]번 index까지 정렬 완료.\n\n", cnt, exchange, i);
     }
     printf("총 비교 횟수는: %d번 입니다.a", total);
 }
@@ -114,13 +117,15 @@ int main()
     {
     case 1:
         insertionSort(arr);
+        // n-1번 비교, n에 비례하는 복잡도
+        // 최악: n(n-1)/2  n^2에 비례
         break;
     case 2:
         printf("<<<<<<<병합 정렬 수행>>>>>>>\n");
         mergeSort(arr, p, r);
         break;
     case 3:
-        // iterationMergeSort();
+
         break;
     default:
         break;
