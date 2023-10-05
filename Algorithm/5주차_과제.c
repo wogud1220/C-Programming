@@ -98,7 +98,51 @@ void quickSort2(int arr[], int p, int r)
 
     return;
 }
+void swap(int arr[], int left, int right)
+{
+    int temp = arr[left];
+    arr[left] = arr[right];
+    arr[right] = temp;
 
+    return;
+}
+int partition3(int arr[], int left, int right)
+{
+    int pivotValue = arr[left];
+    int leftMark = left + 1, rightMark = right;
+    while (leftMark <= rightMark)
+    {
+        while (arr[leftMark] <= pivotValue)
+        {
+            leftMark++;
+        }
+        while (arr[rightMark] > pivotValue)
+        {
+            rightMark--;
+        }
+        if (leftMark <= rightMark)
+        {
+            swap(arr, arr[leftMark], arr[rightMark]);
+        }
+    }
+    swap(arr, arr[left], arr[rightMark]);
+    return rightMark;
+}
+
+void quickSort3(int arr[], int p, int r)
+{
+    if (p < r)
+    {
+        int q = partition3(arr, p, r); // 시작,끝 보내줌
+        // pivot값의 index 리턴받아옴
+        quickSort3(arr, p, q - 1);
+        // pivot보다 작은 범위 정렬
+        quickSort3(arr, q + 1, r);
+        // pivot보다 큰 범위 정렬
+    }
+
+    return;
+}
 int main()
 {
     int arr[10] = {31, 8, 48, 73, 11, 3, 20, 29, 65, 15};
@@ -126,10 +170,14 @@ int main()
             printf("%d ", arr[i]);
         }
         break;
-        /*case 3:
-             partition3();
-             break;
-     */
+    case 3:
+        quickSort3(arr, p, r);
+        printf("\n\n분할3의 최종결과\n");
+        for (int i = 0; i < 10; i++)
+        {
+            printf("%d ", arr[i]);
+        }
+        break;
     default:
         break;
     }
