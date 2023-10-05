@@ -98,7 +98,7 @@ void quickSort2(int arr[], int p, int r)
 
     return;
 }
-void swap(int arr[], int left, int right)
+void swap(int arr[], int left, int right) // 스왑함수
 {
     int temp = arr[left];
     arr[left] = arr[right];
@@ -106,27 +106,37 @@ void swap(int arr[], int left, int right)
 
     return;
 }
+
 int partition3(int arr[], int left, int right)
 {
     int pivotValue = arr[left];
+    // pivot값은 가장왼쪽
     int leftMark = left + 1, rightMark = right;
     while (leftMark <= rightMark)
     {
         while (arr[leftMark] <= pivotValue)
-        {
+        { // pivot이 더 큰 값이면 left한칸 오른쪽으로 이동
             leftMark++;
         }
         while (arr[rightMark] > pivotValue)
-        {
+        { // 작으면 오른쪽거를 왼쪽으로 이동
             rightMark--;
         }
+        for (int a = 0; a < 10; a++)
+        {
+            printf("%d ", arr[a]);
+        }
+        printf("\n");
         if (leftMark <= rightMark)
         {
-            swap(arr, arr[leftMark], arr[rightMark]);
+            swap(arr, leftMark, rightMark);
         }
     }
-    swap(arr, arr[left], arr[rightMark]);
-    return rightMark;
+
+    // 바뀌는 게 끝나면
+    swap(arr, left, rightMark); // pivot과 rightMark스왑
+
+    return rightMark; // pivo위치 받아옴
 }
 
 void quickSort3(int arr[], int p, int r)
@@ -172,6 +182,7 @@ int main()
         break;
     case 3:
         quickSort3(arr, p, r);
+
         printf("\n\n분할3의 최종결과\n");
         for (int i = 0; i < 10; i++)
         {
