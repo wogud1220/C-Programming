@@ -43,7 +43,7 @@ void six(int n, int b)
 {
 
 	if (n > 1)
-		six(n / b, b);
+		six(n / b, b); 
 	if (n % b > 10)
 		printf("%c", 'A' + (n % b) - 10);
 	else
