@@ -24,7 +24,7 @@ void heapify(int arr[], int k, int n)
         }
         else // 왼쪽이 더 클경우
         {
-            smaller = arr[right];
+            smaller = right;
         }
     }
     else if (left <= n)
@@ -46,28 +46,51 @@ void buildHeap(int arr[], int n)
     for (int i = n / 2; i >= 0; i--) // int i=n/2-1 ??
     {
         heapify(arr, i, n);
-        printf("%d ", arr[i]);
+        /*for (int j = 1; j <= n; j++)
+        {
+            printf("%d ", arr[j]);
+        }
+        printf("힙 한번돔\n");*/
     }
     return;
 }
-int heapSort(int arr[], int n)
+void heapSort(int arr[], int n)
 {
     buildHeap(arr, n);
     int temp;
-    for (int i = n;; i = i - 2)
+    for (int i = n; i >= 0; i--)
     {
         temp = arr[1];
         arr[1] = arr[i];
         arr[i] = temp;
         heapify(arr, 1, i - 1);
     }
+    return;
 }
 int main()
 {
-    int arr[10] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    int arr[10];
+    int j = 1;
+    int i = 10;
+    while (j <= 10)
+    {
+        arr[j] = i;
+        i--;
+        j++;
+    }
+    // 배열에 10,9,8,7~~ 들어감
     int size = sizeof(arr) / sizeof(int);
+    printf("정렬 전: ");
+    for (int i = 1; i <= size; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
     heapSort(arr, size);
-    for (int i = 0; i < 10; i++)
+
+    printf("정렬 후:\n");
+    for (int i = 1; i <= size; i++)
     {
         printf("%d ", arr[i]);
     }
