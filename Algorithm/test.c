@@ -1,64 +1,98 @@
-#define _CRT_SECURE_NO_WARNINGS
-#define MAX(a, b) (((a) > (b)) ? (a) : (b))
-#define MAX_SIZE 1000001
-#define TRUE 1
-#define FALSE 0
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
-#include <math.h>
-#include <memory.h>
-#include <ctype.h>
-// #include <windows.h>
-// #pragma warning(disable:4996)
+// #include <stdbool.h>
 
-int partition2(int arr[], int p, int r)
+#define MAX_NODES 300001 // 최대 노드 수에 맞게 조절
+#define INF 1e9
+
+int graph[MAX_NODES][MAX_NODES]; // 그래프를 인접 행렬로 표현
+int distance[MAX_NODES];         // 시작 노드로부터의 최단 거리를 저장하는 배열
+
+void dijkstra(int start, int N)
 {
-    int temp;
-    int x = arr[p]; // 첫 번째 요소를 pivot으로 선택
-    int i = p - 1;
+    int visited[MAX_NODES] = {0}; // 방문 여부를 나타내는 배열
 
-    for (int j = p; j <= r; j++)
+    // 모든 노드의 최단 거리를 무한대로 초기화
+    for (int i = 1; i <= N; i++)
     {
-        if (arr[j] <= x)
-        {
-            ++i;
-            temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-        }
+        distance[i] = INF;
     }
 
-    temp = arr[i + 1];
-    arr[i + 1] = arr[p];
-    arr[p] = temp;
+    // 시작 노드의 최단 거리를 0으로 초기화
+    distance[start] = 0;
 
-    return i + 1;
-}
-
-void quicksort2(int arr[], int p, int r)
-{
-    if (p < r)
+    // 모든 노드를 순회
+    for (int i = 0; i < N; i++)
     {
-        int q = partition2(arr, p, r);
-        quicksort2(arr, p, q - 1);
-        quicksort2(arr, q + 1, r);
+        // 현재까지 방문하지 않은 노드 중에서 최단 거리가 가장 짧은 노드를 찾음
+        int min_distance = INF;
+        int min_node = -1;
+        for (int j = 1; j <= N; j++)
+        {
+            if (!visited[j] && distance[j] < min_distance)
+            {
+                min_distance = distance[j];
+                min_node = j;
+            }
+        }
+
+        // 최단 거리 노드를 방문 처리
+        visited[min_node] = 1;
+
+        // 최단 거리 노드를 거쳐서 갈 수 있는 노드의 최단 거리를 갱신
+        for (int j = 1; j <= N; j++)
+        {
+            if (graph[min_node][j] != 0 && !visited[j])
+            {
+                if (distance[min_node] + graph[min_node][j] < distance[j])
+                {
+                    distance[j] = distance[min_node] + graph[min_node][j];
+                }
+            }
+        }
     }
 }
 
 int main()
 {
-    int arr[] = {31, 8, 48, 73, 11, 3, 20, 29, 65, 15};
-    int n = sizeof(arr) / sizeof(arr[0]);
+    int N, M, K, X;
+    scanf("%d %d %d %d", &N, &M, &K, &X);
 
-    quicksort2(arr, 0, 9);
-
-    printf("quicksort2 결과:\n");
-    for (int i = 0; i < n; i++)
+    // 그래프 초기화
+    for (int i = 1; i <= N; i++)
     {
-        printf("%d ", arr[i]);
+        for (int j = 1; j <= N; j++)
+        {
+            graph[i][j] = 0;
+        }
     }
-    printf("\n");
+
+    // 간선 정보 입력
+    for (int i = 0; i < M; i++)
+    {
+        int src, dest;
+        scanf("%d %d", &src, &dest);
+        graph[src][dest] = 1; // 간선 정보 입력 (방향 그래프)
+    }
+
+    // 다익스트라 알고리즘 호출
+    dijkstra(X, N);
+
+    // 최단 거리가 K인 노드 출력
+    int found = 0;
+    for (int i = 1; i <= N; i++)
+    {
+        if (distance[i] == K)
+        {
+            printf("%d\n", i);
+            found = 1;
+        }
+    }
+
+    if (!found)
+    {
+        printf("-1\n"); // K인 거리의 노드를 찾지 못한 경우
+    }
 
     return 0;
 }
