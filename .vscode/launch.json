@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/yoonjaehyeong/Desktop/Git/C-Programming/Algorithm",
-      "program": "/Users/yoonjaehyeong/Desktop/Git/C-Programming/Algorithm/build/Debug/outDebug"
+      "cwd": "/Users/yoonjaehyeong/Desktop/Git/C-Programming",
+      "program": "/Users/yoonjaehyeong/Desktop/Git/C-Programming/build/Debug/outDebug"
     }
   ]
 }

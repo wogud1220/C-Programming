@@ -14,74 +14,91 @@
 void heapify(int arr[], int k, int n)
 {
     int left = 2 * k;
-    int right = (2 * k) + 1;
-    int smaller, temp;
-    if (right <= n) // k의 자식 노드가 2개라면
+    int right = 2 * k + 1;
+    int bigger, temp;
+
+    if (right <= n)
     {
         if (arr[left] < arr[right])
-        { // 오른쪽 노드가 더 클 경우, 왼쪽이 더 작은 값
-            smaller = left;
+        { // 오른쪽이 더크면
+            bigger = right;
         }
-        else // 왼쪽이 더 클경우
+        else
         {
-            smaller = right;
+            bigger = left;
         }
     }
     else if (left <= n)
-    { // 왼쪽 자식만 있는 경우
-        smaller = left;
+    { // 자식이 왼쪽만 있는 경우
+        bigger = left;
     }
+
     else
-        return;
-    if (arr[smaller] < arr[k])
     {
-        temp = arr[k];
-        arr[k] = arr[smaller];
-        arr[smaller] = temp;
-        heapify(arr, smaller, n);
+        return;
+    }
+    if (arr[bigger] > arr[k])
+    {
+        int temp = arr[k];
+        arr[k] = arr[bigger];
+        arr[bigger] = temp;
+        printf("    root = %d\n", arr[1]);
+        printf("heapTree ");
         for (int i = 1; i <= n; i++)
         {
             printf("%d ", arr[i]);
         }
-        printf("\n");
+        heapify(arr, bigger, n);
     }
 }
+
 void buildHeap(int arr[], int n)
-{                                    // arr을 힙으로 만듦
-    for (int i = n / 2; i >= 1; i--) // int i=n/2-1 ??
+{
+    for (int i = n / 2; i >= 1; i--)
     {
         heapify(arr, i, n);
     }
-    return;
 }
+
 void heapSort(int arr[], int n)
 {
     buildHeap(arr, n);
-    int temp;
     for (int i = n; i >= 2; i--)
     {
-        temp = arr[1];
+        int temp = arr[1];
         arr[1] = arr[i];
         arr[i] = temp;
         heapify(arr, 1, i - 1);
     }
-    return;
 }
+
 int main()
 {
-    int arr[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    int size = sizeof(arr) / sizeof(int) - 1;
-    printf("정렬 전: ");
-    for (int i = 1; i <= size; i++)
+    int arr[] = {0, 9, 8, 7, 6, 5, 4, 3, 2};
+    int n = sizeof(arr) / sizeof(int) - 1; // -1을 제외한 요소의 개수 계산
+    int num = 0;
+    int size = n;
+    printf("1:buildMinHeap\n2:isMaxHeap\n3:queue\n");
+    scanf("%d", &num);
+    switch (num)
     {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
-    heapSort(arr, size);
+    case 1:
+        printf("오름차순 정렬 전: ");
+        for (int i = 1; i <= size; i++)
+        {
+            printf("%d ", arr[i]);
+        }
+        heapSort(arr, size);
+        printf("\n오름차순 정렬 후:\n");
+        for (int i = 1; i <= size; i++)
+        {
+            printf("%d ", arr[i]);
+        }
+        break;
 
-    printf("정렬 후:\n");
-    for (int i = 1; i <= size; i++)
-    {
-        printf("%d ", arr[i]);
+    default:
+        break;
     }
+
+    return 0;
 }
