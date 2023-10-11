@@ -165,39 +165,45 @@ int deleteQueue(heapQueue *heapQueue)
     heapQueue->data[index] = lastValue;
     return maxValue;
 }
-void insertQueue(heapQueue *heapQueue, int arr[], int item)
+void insertQueue(heapQueue *heapQueue, int item)
 {
     // 우선순위 큐에 값 추가
     heapQueue->size++;
     int index = heapQueue->size;
-    if (index > 100) // 큐 최대 데이터 개수가 100개임
+    if (index > 100)
+    { // 큐 최대 데이터 개수가 100개임
         printf("용량 초과");
+        return;
+    }
 
     while (item > heapQueue->data[index / 2])
     { // 새로 들어온 값이 부모노드보다 크다면
         heapQueue->data[index] = heapQueue->data[index / 2];
         index /= 2;
+        if (index == 1) // 루트 넣을때 오류남 더이상 올라가지안ㄷ로골
+            break;
     }
 
     heapQueue->data[index] = item;
 }
-
 int main()
 {
     int arr[] = {0, 9, 7, 5, 3, 1};
-    int arrMaxHeap[] = {0, 9, 8, 2, 6, 5, 4, 3, 7};
+    int arrMaxHeap[] = {0, 5, 4, 3, 2, 1};
     int n = sizeof(arr) / sizeof(int) - 1; // -1을 제외한 요소의 개수 계산
     int num = 1;
     int size = n;
+
+    int sizeIsMax = (sizeof(arrMaxHeap) / 4) - 1;
     int isMax;
     int MaxRecur;
     heapQueue heapQueue;
     int item = 0;
     int deleteItem;
-
+    initQueue(&heapQueue, sizeIsMax, arrMaxHeap);
     while (num != 0)
     {
-        printf("\n0:Exit\n1:buildMinHeap\n2:isMaxHeapFor\n3:isMaxHeapRecur\n4:heapQueue\n");
+        printf("\n0:Exit\n1:buildMinHeap\n2:isMaxHeapFor\n3:isMaxHeapRecur\n4:insertQueue\n5:deleteQueue");
         scanf("%d", &num);
         switch (num)
         {
@@ -216,11 +222,11 @@ int main()
             printf("\n");
             break;
         case 2: // 반복문을 사용한 최대힙 판별;
-            isMax = isMaxHeapFor(arrMaxHeap, size);
+            isMax = isMaxHeapFor(arrMaxHeap, sizeIsMax);
             if (isMax == 1)
             {
                 printf("\n");
-                for (int i = 1; i <= size; i++)
+                for (int i = 1; i <= sizeIsMax; i++)
                 {
                     printf("%d ", arrMaxHeap[i]);
                 }
@@ -229,7 +235,7 @@ int main()
             else if (isMax == 0)
             {
                 printf("\n");
-                for (int i = 1; i <= size; i++)
+                for (int i = 1; i <= sizeIsMax; i++)
                 {
                     printf("%d ", arrMaxHeap[i]);
                 }
@@ -237,18 +243,18 @@ int main()
             }
             break;
         case 3: // 순환호출을 사용한 최대힙 판별
-            MaxRecur = isMaxRecur(arrMaxHeap, 1, size / 2);
+            MaxRecur = isMaxRecur(arrMaxHeap, 1, sizeIsMax / 2);
             if (MaxRecur)
             {
                 printf("\n순환호출로 한 최대힙 판별은 참입니다.\n");
-                for (int i = 1; i <= size; i++)
+                for (int i = 1; i <= sizeIsMax; i++)
                 {
                     printf("%d ", arrMaxHeap[i]);
                 }
             }
             else
             {
-                for (int i = 1; i <= size; i++)
+                for (int i = 1; i <= sizeIsMax; i++)
                 {
                     printf("%d ", arrMaxHeap[i]);
                 }
@@ -256,16 +262,24 @@ int main()
             }
             break;
         case 4: // 우선 순위 큐 구현
-            // heapSort(arr, size);              // 먼저 배열 수선
-            initQueue(&heapQueue, size, arr); // 수선한 배열 큐에 넣기
+                // 수선한 배열 큐에 넣기
             printf("\n넣을 값을 입력하세요.");
             scanf("%d", &item);
-            insertQueue(&heapQueue, arr, item);
-            deleteItem = deleteQueue(&heapQueue);
-            printf("root= %d\n", deleteItem);
-            for (int i = 1; i <= size; i++)
+            insertQueue(&heapQueue, item);
+            for (int i = 1; i <= heapQueue.size; i++)
             {
                 printf("%d ", heapQueue.data[i]);
+                arrMaxHeap[i] = heapQueue.data[i];
+            }
+
+            break;
+        case 5:
+            deleteItem = deleteQueue(&heapQueue);
+            printf("root= %d\n", deleteItem);
+            for (int i = 1; i <= heapQueue.size; i++)
+            {
+                printf("%d ", heapQueue.data[i]);
+                arrMaxHeap[i] = heapQueue.data[i];
             }
             break;
         default:
