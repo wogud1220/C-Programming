@@ -33,12 +33,11 @@ void selectsort()
                 min = arr[i + 1];
                 minIdx = i + 1;
                 cnt++; // 교환 횟수 증가;
-
-                temp = arr[j]; // 첫번째값이랑 교환하고
-                arr[j] = min;
-                arr[minIdx] = temp;
             }
         }
+        temp = arr[j]; // 첫번째값이랑 교환하고
+        arr[j] = min;
+        arr[minIdx] = temp;
         for (int a = 0; a < sizeof(arr) / 4; a++)
         {
             printf("[%d] ", arr[a]);

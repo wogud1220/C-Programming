@@ -107,7 +107,7 @@ void mergeSort(int arr[], int p, int r)
 
 int main()
 {
-    int arr[] = {69, 10, 30, 2, 16, 8, 31, 22};
+    int arr[] = {1, 4, 5, 2, 16, 8, 31, 22};
     int p = 0;
     int r = 7;
     printf("1:insertionSort\n2:mergeSort\n");

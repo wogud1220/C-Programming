@@ -1,0 +1,119 @@
+#define _CRT_SECURE_NO_WARNINGS
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
+#define MAX_SIZE 1000001
+#define TRUE 1
+#define FALSE 0
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+#include <memory.h>
+#include <ctype.h>
+// #include <windows.h>
+// #pragma warning(disable:4996)
+#include <limits.h>
+#define INF 1000000
+#define MAX_N 3000
+
+typedef struct Node // 구조체 생성
+{
+    int city;
+    int distance;
+    struct Node *next;
+} Node;
+
+Node *graph[MAX_N];
+// 각 도시에서 연결된 도시들 구조체 배열
+int shortestDistance[MAX_N];
+// 최단거리저장배열
+
+void addEdge(int u, int v) // u, v 사이에 간선추가
+{
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    newNode->city = v;     // 도착도시
+    newNode->distance = 1; // 모든 도로의 길이가 1임
+    newNode->next = graph[u];
+    graph[u] = newNode; // 시작도시 맨 앞에 추가함
+}
+
+void dijkstra(int start, int n)
+{
+    int visited[MAX_N] = {0};    // 모두 방문 안 함
+    for (int i = 1; i <= n; i++) // 처음엔 모드 노드들 무한대로 적음
+    {
+        shortestDistance[i] = INF;
+    }
+
+    shortestDistance[start] = 0; // 출발도시 0
+
+    for (int i = 1; i <= n; i++)
+    {
+        int minDist = INF; // 맨처음엔 무한대로 저장
+        int minIndex = -1; // 최소거리 가지는 도시 인덱스번호
+
+        for (int j = 1; j <= n; j++) // 모든 도시 돌면서
+        {
+            if (!visited[j] && shortestDistance[j] < minDist)
+            // 방문 안하고 최단거리 배열에 저장된 값이 현재까지의 최소거리보다 작다면
+            { // 현재까지의 최소거리에 최단거리배열에 있는 값 저장, 더 짧은 길 찾으니
+                minDist = shortestDistance[j];
+                minIndex = j;
+                // j가 더 짧은 도시이니 도시 업데이트
+            }
+        }
+
+        visited[minIndex] = 1; /// 방문 했다 표시
+        // 이웃 도시간의 최단거리 업데이트
+        for (Node *neighbor = graph[minIndex]; neighbor != NULL; neighbor = neighbor->next)
+        // 다음 리스트로 이어져 나가면서
+        {
+            int nextCity = neighbor->city; // 연결된 도시 업데이트
+            int edgeWeight = neighbor->distance;
+            // 연결된 도시의 가중치 저장
+            if (!visited[nextCity] && shortestDistance[minIndex] + edgeWeight < shortestDistance[nextCity])
+            { // nextcity 방문 안 하고
+                // 현재도시 최단거리+가중치 < 이웃도시로 가는 거리
+                // 최단거리 배열에 현재도시 최단거리+가중치 업데이트해줌
+                shortestDistance[nextCity] = shortestDistance[minIndex] + edgeWeight;
+            }
+        }
+    }
+}
+
+int main()
+{
+    int n, m, k, x;
+    scanf("%d %d %d %d", &n, &m, &k, &x);
+
+    for (int i = 1; i <= n; i++)
+    {
+        graph[i] = NULL;
+    }
+    // 도시 수만큼 초기화
+
+    for (int i = 0; i < m; i++)
+    {
+        int u, v;
+        scanf("%d %d", &u, &v);
+        addEdge(u, v);
+    } // 도로 개수만큼 이어줌
+
+    dijkstra(x, n);
+
+    int found = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        if (shortestDistance[i] == k)
+        {
+            printf("%d\n", i);
+            found = 1;
+        }
+    }
+
+    if (!found)
+    {
+        printf("-1\n");
+    }
+
+    return 0;
+}
