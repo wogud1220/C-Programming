@@ -15,7 +15,7 @@ int partition1(int arr[], int p, int r) // 1이랑 9받음
 // 맨 오른쪽 값이 pivot
 {
     int temp;
-    int x = arr[r];                  // pivot값 들어감
+    int x = arr[r];                  // pivot값 들어감, 마지막 값이 피벗임
     int i = p - 1;                   // i는 시작한칸전 가르킴
     for (int j = p; j <= r - 1; j++) // 마지막 요소까지 비교
     {
