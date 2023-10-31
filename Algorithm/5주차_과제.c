@@ -56,12 +56,12 @@ void quickSort(int arr[], int p, int r)
 }
 
 int partition2(int arr[], int p, int r) // 1이랑 9받음
-// 맨 오른쪽 값이 pivot
+// 맨 왼쪽이 피봇
 {
     int temp;
-    int x = arr[p];              // 첫번재 인덱스에 pivot
-    int i = p - 1;               // i는 시작한칸전 가르킴
-    for (int j = p; j <= r; j++) // 마지막 요소까지 비교
+    int x = arr[p];                  // 첫번재 인덱스에 pivot
+    int i = p;                       // i는 시작한칸전 가르킴
+    for (int j = p + 1; j <= r; j++) // 마지막 요소까지 비교
     {
         if (arr[j] <= x) // pivot이 더 크면
         {
@@ -165,7 +165,7 @@ int main()
     {
     case 1:
 
-        quickSort(arr, p, r);
+        quickSort2(arr, p, r);
         printf("\n\n분할1의 최종결과\n");
         for (int i = 0; i < 10; i++)
         {

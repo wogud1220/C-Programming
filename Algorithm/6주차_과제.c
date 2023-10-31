@@ -63,7 +63,7 @@ void buildHeap(int arr[], int n)
 void heapSort(int arr[], int n)
 {
     buildHeap(arr, n);
-    for (int i = n; i >= 2; i--)
+    for (int i = n; i >= 1; i--)
     {
         int temp = arr[1];
         arr[1] = arr[i];

@@ -8,7 +8,7 @@ struct PriorityQueue
 {
     int heap[MAX_SIZE];
     int size;
-};
+} PriorityQueue;
 
 // 우선순위 큐 초기화
 void initPriorityQueue(struct PriorityQueue *pq)
@@ -39,7 +39,7 @@ void enqueue(struct PriorityQueue *pq, int value)
 }
 
 // 우선순위 큐에서 최대값을 제거하고 반환
-int dequeue(struct PriorityQueue *pq)
+int dequeue(PriorityQueue *pq)
 {
     if (pq->size == 0)
     {

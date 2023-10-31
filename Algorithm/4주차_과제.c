@@ -52,7 +52,7 @@ void merge(int arr[], int p, int q, int r)
     int temp[100];
     int i = p;
     int j = q + 1;
-    int t = 1;
+    int t = 0;
     int a = 0;
 
     while (i <= q && j <= r) // 정렬이 안끝난 상태에서
@@ -77,7 +77,7 @@ void merge(int arr[], int p, int q, int r)
     }
 
     i = p;
-    t = 1;
+    t = 0;
     while (i <= r) // 결과 저장
     {
         arr[i++] = temp[t++];
